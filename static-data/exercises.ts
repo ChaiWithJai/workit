@@ -201,7 +201,7 @@ export default [
         name: 'Suicide Burpees',
         duration: 60,
         planeOfMotion: 'sagittal',
-        writtenInstructions: 'Run one way, burpee, run back burpee that's 1. Do that 10 times.',
+        writtenInstructions: `Run one way, burpee, run back burpee that's 1. Do that 10 times.`,
         mediaInstructions: 'google.com',
         spaceNeeded: 'openField',
         cardioIntensity: 'high',
