@@ -24,6 +24,8 @@ interface IUserPreferences {
     equipment: string | undefined;
 }
 
+export const exerciseFinder = (exerciseName: string, list: IExercise[]) => list.find(ex => ex.name === exerciseName)
+
 export const workoutBuilder = (rounds: IRound[], list: IExercise[], {duration, equipment}: IUserPreferences): IRound[] => {
     if (!duration) return [];
     const workoutRounds: IRound[] = [];

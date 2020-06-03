@@ -21,8 +21,12 @@ const WorkoutContainer: React.FC = () => {
 
     return (
         <div>
-            {isVisible && <WorkoutPreferences setIsVisible={setIsVisible} preferences={preferences} setPreferences={setPreferences} />}
-            <WorkoutOverview />
+            {
+            isVisible && <>
+                <WorkoutPreferences  preferences={preferences} setPreferences={setPreferences} />
+                <WorkoutOverview setIsVisible={setIsVisible} workout={workout} exercises={exercises} />
+            </>
+            }
         </div>
     )
 }
