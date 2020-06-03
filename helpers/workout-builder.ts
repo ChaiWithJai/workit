@@ -1,12 +1,31 @@
 import {shuffle} from 'lodash';
 
-export const workoutBuilder = (rounds, list, {duration, equipment}) => {
-    const workoutRounds = [];
+export interface IExercise {
+    name: string
+    duration: number
+    planeOfMotion: string | string[]
+    writtenInstructions: string | null
+    mediaInstructions: string | null
+    spaceNeeded:  string, // should this be more like a scale
+    cardioIntensity:  string
+    impactToBody:  string
+    equipmentNeeded: string[]
+}
+
+export interface IRound {
+    exercisesInRound: string[];
+    intensity: string;
+    isStarter: boolean;
+    isFinisher: boolean;
+}
+
+export const workoutBuilder = (rounds: IRound[], list: IExercise[], {duration, equipment}): IRound[] => {
+    const workoutRounds: IRound[] = [];
     let builder = rounds;
     const isBodyWeight = (equip) => equip === '';
   
     // user filters
-    if (equipment || isBodyWeight(equipment)) builder = builder.filter(({exercisesInRound}) => {
+    if (equipment || isBodyWeight(equipment)) builder = builder.filter(({exercisesInRound}: IRound) => {
       let isWithNecessaryEquipment = true;
       for (const exercise of exercisesInRound) {
         const {equipmentNeeded} = list.find(ex => ex.name === exercise);
