@@ -184,5 +184,13 @@ export default [
       intensity: 'high',
       isStarter: false,
       isFinisher: true
+    },
+    {
+      exercisesInRound: [
+        'Plank'
+      ],
+      intensity: 'low',
+      isStarter: false,
+      isFinisher: true
     }
   ]

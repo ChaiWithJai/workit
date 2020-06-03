@@ -9,7 +9,7 @@ export interface IExercise {
     spaceNeeded:  string, // should this be more like a scale
     cardioIntensity:  string
     impactToBody:  string
-    equipmentNeeded: string[]
+    equipmentNeeded: string
 }
 
 export interface IRound {
@@ -19,16 +19,22 @@ export interface IRound {
     isFinisher: boolean;
 }
 
-export const workoutBuilder = (rounds: IRound[], list: IExercise[], {duration, equipment}): IRound[] => {
+interface IUserPreferences {
+    duration: number;
+    equipment: string | undefined;
+}
+
+export const workoutBuilder = (rounds: IRound[], list: IExercise[], {duration, equipment}: IUserPreferences): IRound[] => {
+    if (!duration) return [];
     const workoutRounds: IRound[] = [];
     let builder = rounds;
-    const isBodyWeight = (equip) => equip === '';
+    const isBodyWeight = (equip: string | undefined) => equip === '';
   
     // user filters
     if (equipment || isBodyWeight(equipment)) builder = builder.filter(({exercisesInRound}: IRound) => {
       let isWithNecessaryEquipment = true;
       for (const exercise of exercisesInRound) {
-        const {equipmentNeeded} = list.find(ex => ex.name === exercise);
+        const {equipmentNeeded} = list.find(ex => ex.name === exercise) as IExercise;
   
         if (equipmentNeeded !== equipment && !isBodyWeight(equipmentNeeded)) {
           isWithNecessaryEquipment = false;
@@ -59,7 +65,7 @@ export const workoutBuilder = (rounds: IRound[], list: IExercise[], {duration, e
   
     workoutRounds.push(...middle)
   
-    const finisher = roundsShuffled.find(({isFinisher}) => isFinisher);
+    const finisher = roundsShuffled.find(({isFinisher}) => isFinisher) as IRound;
   
     workoutRounds.push(finisher)
   

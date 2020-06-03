@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import WorkoutContainer from './workout-manager/workout-container';
 
-function App() {
+interface IPreferences {
+  duration: number;
+  equipment: string;
+}
+
+const App: React.FC = () => {
+  const [preferences, setPreferences] = useState<IPreferences>({duration: 0, equipment: ''})
   return (
     <div className="Workit">
       <header className="Workit-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          This is an app.
-        </a>
+        Workit!
       </header>
+      <WorkoutContainer />
     </div>
   );
 }
