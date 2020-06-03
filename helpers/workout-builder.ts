@@ -9,7 +9,7 @@ export const workoutBuilder = (rounds, list, {duration, equipment}) => {
     if (equipment || isBodyWeight(equipment)) builder = builder.filter(({exercisesInRound}) => {
       let isWithNecessaryEquipment = true;
       for (const exercise of exercisesInRound) {
-        const {name, equipmentNeeded} = list.find(ex => ex.name === exercise);
+        const {equipmentNeeded} = list.find(ex => ex.name === exercise);
   
         if (equipmentNeeded !== equipment && !isBodyWeight(equipmentNeeded)) {
           isWithNecessaryEquipment = false;
