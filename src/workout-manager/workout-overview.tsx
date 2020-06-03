@@ -4,19 +4,16 @@ const WorkoutOverview: React.FC = () => {
     return (
         <table>
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Age</th>
+                <th>Exercise</th>
+                <th>Duration</th>
             </tr>
             <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
+                <td>Plank</td>
+                <td>180</td>
             </tr>
             <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-                <td>94</td>
+                <td>Push ups</td>
+                <td>60</td>
             </tr>
         </table>
     )
