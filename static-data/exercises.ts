@@ -504,5 +504,16 @@ export default [
         cardioIntensity: 'medium',
         impactToBody: 'medium',
         equipmentNeeded: 'dumbbell'
+      },
+      {
+        name: 'Plank',
+        duration: 180,
+        planeOfMotion: 'transverse',
+        writtenInstructions: `heels pointed away from the body, keep a straight back`,
+        mediaInstructions: 'google.com',
+        spaceNeeded: 'smallCorner',
+        cardioIntensity: 'low',
+        impactToBody: 'low',
+        equipmentNeeded: ''
       }
     ]
