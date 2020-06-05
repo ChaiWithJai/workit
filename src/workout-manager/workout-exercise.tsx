@@ -6,7 +6,6 @@ interface IProps {
     workoutList: IExercise[];
 }
 
-
 interface IAction {
     type: 'next' | 'pace';
 }

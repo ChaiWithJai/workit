@@ -6,9 +6,11 @@ interface IProps {
     setPreferences: React.Dispatch<React.SetStateAction<IPreferences>>;
 }
 
+const options = ['', 'dumbbell', 'band']
+
 const WorkoutPreferences: React.FC<IProps> = ({setPreferences, preferences}) => {
     const {duration, equipment} = preferences;
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         e.preventDefault();
         setPreferences({...preferences, [e.target.name]: e.target.value});
     }
@@ -19,7 +21,14 @@ const WorkoutPreferences: React.FC<IProps> = ({setPreferences, preferences}) => 
                     <label>Duration:</label><br />
                     <input type="text" id="duration" name="duration" value={duration} onChange={(e) => handleOnChange(e)} /><br/>
                     <label>Equipment:</label><br />
-                    <input type="text" id="equipment" name="equipment" value={equipment} onChange={(e) => handleOnChange(e)} /><br/><br/>
+                    <select id="equipment" name="equipment" value={equipment} onChange={(e) => handleOnChange(e)}>
+                        {
+                            options.map((option,idx) => {
+                            return <option key={`option ${idx}`} value={option}>{option}</option>
+                            })
+                        }
+                    </select>
+                    <br/><br/>
                 </form> 
         </div>
     )
