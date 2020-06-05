@@ -19,7 +19,7 @@ const WorkoutPreferences: React.FC<IProps> = ({setPreferences, preferences}) => 
             <h2>Workout Preferences</h2>
                 <form>
                     <label>Duration:</label><br />
-                    <input type="text" id="duration" name="duration" value={duration} onChange={(e) => handleOnChange(e)} /><br/>
+                    <input type="number" min="3" id="duration" name="duration" value={duration} onChange={(e) => handleOnChange(e)} /><br/>
                     <label>Equipment:</label><br />
                     <select id="equipment" name="equipment" value={equipment} onChange={(e) => handleOnChange(e)}>
                         {
