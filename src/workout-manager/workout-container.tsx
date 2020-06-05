@@ -12,7 +12,7 @@ export interface IPreferences {
 
 const WorkoutContainer: React.FC = () => {
     const [isVisible, setIsVisible]= useState<boolean>(true);
-    const [preferences, setPreferences] = useState<IPreferences>({duration: 0, equipment: ''})
+    const [preferences, setPreferences] = useState<IPreferences>({duration: 3, equipment: ''})
     const [workout, setWorkout] = useState<IRound[]>([]);
     const {exercises, rounds} = staticData;
 
