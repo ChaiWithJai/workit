@@ -1,42 +1,60 @@
-import React, {useState, useEffect} from 'react';
+import {addSeconds, differenceInSeconds} from 'date-fns';
+import React, {useEffect, useReducer} from 'react';
 import { IExercise } from '../helpers/workout-builder';
 
 interface IProps {
-    currentExercise: string;
+    workoutList: IExercise[];
 }
 
-const WorkoutExercise: React.FC<IProps> = ({currentExercise}: IProps) => {
-    const [timeLeft, setTimeLeft] = useState({currentTimeSec: 59, currentTimeMin: 2})
 
-    const formatTime = (val: number) => {
-        let value = val.toString();
-        if (value.length < 2) {
-          value = '0' + value;
-        }
-        return value;
-      };
+interface IAction {
+    type: 'next' | 'pace';
+}
 
-    const pace = () => {
-        setTimeLeft({ ...timeLeft, currentTimeSec: timeLeft.currentTimeSec - 1 });
-        if (timeLeft.currentTimeSec <= 0) {
-          setTimeLeft({ ...timeLeft, currentTimeMin: timeLeft.currentTimeMin - 1, currentTimeSec: 59 });
+interface IState {
+    currentExerciseIdx: number;
+    currentExercise: IExercise;
+    timeOver: Date;
+    timeLeft: number;
+}
+
+const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
+    const initialState: IState = {
+        currentExerciseIdx: 0, 
+        currentExercise: workoutList[0],
+        timeLeft: workoutList[0].duration,
+        timeOver: addSeconds(new Date(), workoutList[0].duration)
+    };
+
+    const reducer = (state: IState, action: IAction): IState => {
+        switch(action.type) {
+            case 'next':
+                return {...state, currentExerciseIdx: state.currentExerciseIdx+1, currentExercise: workoutList[state.currentExerciseIdx+1], timeOver: addSeconds(new Date(), workoutList[state.currentExerciseIdx+1].duration), timeLeft: workoutList[state.currentExerciseIdx+1].duration};
+            case 'pace':
+                return {...state, timeLeft: differenceInSeconds(state.timeOver, new Date())}
         }
-      };
+    };
+
+    const [{currentExercise, timeLeft}, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        setTimeout(() => pace(), 1000)
-    })
+        const interval = setInterval(() => dispatch({type: 'pace'}), 1000);
+        if (timeLeft <= 0) {
+            dispatch({type: 'next'});
+            return;
+        }
+        return () => clearInterval(interval);
+    }, [timeLeft])
 
     return (
         <>
         <h1>
         <span>
-          {formatTime(timeLeft.currentTimeMin)}:
-          {formatTime(timeLeft.currentTimeSec)}
+          {timeLeft}
         </span>
         </h1>
         <br /><br /><br />
-        <h2>{currentExercise}</h2>
+        <h2>{currentExercise.name}</h2>
         </>
     )
 }
