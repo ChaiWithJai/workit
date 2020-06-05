@@ -50,7 +50,7 @@ const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
         <>
         <h1>
         <span>
-          {timeLeft}:
+          {timeLeft}
         </span>
         </h1>
         <br /><br /><br />
