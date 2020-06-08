@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import WorkoutExercise from './workout-exercise';
 import WorkoutWelcome from './workout-welcome';
 import WorkoutOverview from './workout-overview';
