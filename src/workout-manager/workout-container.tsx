@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import WorkoutExercise from './workout-exercise';
-import WorkoutOverview from './workout-overview'
+import WorkoutWelcome from './workout-welcome';
+import WorkoutOverview from './workout-overview';
 import WorkoutPreferences from './workout-preferences';
 import {exerciseFinder, workoutBuilder, IExercise, IRound} from '../helpers/workout-builder';
 import staticData from '../static-data'
@@ -11,7 +12,7 @@ export interface IPreferences {
 }
 
 const WorkoutContainer: React.FC = () => {
-    const [isVisible, setIsVisible]= useState<boolean>(true);
+    const [userFunnelIdx, setUserFunnelIdx] = useState<number>(0);
     const [preferences, setPreferences] = useState<IPreferences>({duration: 3, equipment: ''})
     const [workout, setWorkout] = useState<IRound[]>([]);
     const {exercises, rounds} = staticData;
@@ -22,20 +23,23 @@ const WorkoutContainer: React.FC = () => {
         })
     }).flat();
 
+    const renderSwitch = (idx: number) => {
+        switch(idx) {
+            case 0: return <WorkoutWelcome setUserFunnelIdx={setUserFunnelIdx} />;
+            case 1: return <WorkoutPreferences setUserFunnelIdx={setUserFunnelIdx} preferences={preferences} setPreferences={setPreferences} />;
+            case 2: return <WorkoutOverview setUserFunnelIdx={setUserFunnelIdx} workout={workout} exercises={exercises} />;
+            case 3: return <WorkoutExercise workoutList={workoutList} />
+        }
+    };
+
     useEffect(() => {
-        setWorkout(workoutBuilder(rounds, exercises, preferences))
-    }, [preferences, isVisible, exercises, rounds])
+        setWorkout(workoutBuilder(rounds, exercises, preferences));
+    }, [preferences, exercises, rounds]);
+
 
     return (
         <div>
-            {
-            isVisible ? <>
-                <WorkoutPreferences  preferences={preferences} setPreferences={setPreferences} />
-                <WorkoutOverview setIsVisible={setIsVisible} workout={workout} exercises={exercises} />
-            </>
-            :
-            <WorkoutExercise workoutList={workoutList} />
-            }
+            {renderSwitch(userFunnelIdx)}
         </div>
     )
 }

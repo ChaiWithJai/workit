@@ -3,11 +3,11 @@ import {exerciseFinder, IExercise, IRound} from '../helpers/workout-builder';
 
 interface IProps {
     exercises: IExercise[];
-    setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    setUserFunnelIdx: React.Dispatch<React.SetStateAction<number>>;
     workout: IRound[];
 }
 
-const WorkoutOverview: React.FC<IProps> = ({exercises, setIsVisible, workout}: IProps) => {
+const WorkoutOverview: React.FC<IProps> = ({exercises, setUserFunnelIdx, workout}: IProps) => {
     return (
         <>
             <table>
@@ -29,7 +29,7 @@ const WorkoutOverview: React.FC<IProps> = ({exercises, setIsVisible, workout}: I
                     })
                 }
             </table>
-            <button onClick={() => setIsVisible(false)}>Let's get started!!</button>
+            <button onClick={() => setUserFunnelIdx(3)}>Let's get started!!</button>
         </>
     )
 }
