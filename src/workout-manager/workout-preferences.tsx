@@ -25,6 +25,7 @@ const WorkoutPreferences: React.FC<IProps> = ({setUserFunnelIdx, setPreferences,
                 <select id="equipment" name="equipment" value={equipment} onChange={(e) => handleOnChange(e)}>
                     {
                         options.map((option,idx) => {
+                        if (!option) return <option key={`option ${idx}`} value={option}>bodyweight</option>
                         return <option key={`option ${idx}`} value={option}>{option}</option>
                         })
                     }
