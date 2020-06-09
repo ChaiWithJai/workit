@@ -4,9 +4,9 @@ import WorkoutContainer from './workout-manager/workout-container';
 
 const App: React.FC = () => {
   return (
-    <div className="Workit">
-      <header className="Workit-header">
-        Workit!
+    <div>
+      <header className="workit-header">
+      <h1>💪🏾💪🏾💪🏾 Workit Circuits! 💪🏾💪🏾💪🏾</h1>
       </header>
       <WorkoutContainer />
     </div>
