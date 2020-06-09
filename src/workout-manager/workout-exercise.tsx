@@ -1,12 +1,7 @@
 import {addSeconds, differenceInSeconds} from 'date-fns';
 import React, {useEffect, useReducer} from 'react';
 import { IExercise } from '../helpers/workout-builder';
-import youtubeSearch from '../youtube-search-helpers/search-helper';
 import VideoIFrame from '../youtube-search-helpers/video-iframe';
-
-const YOUTUBE_API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
-
-console.log('api key', YOUTUBE_API_KEY)
 
 interface IProps {
     workoutList: IExercise[];
@@ -61,7 +56,7 @@ const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
         <br /><br /><br />
         <h2>{currentExercise.name}</h2>
         <h3>How To:</h3>
-        <VideoIFrame video={youtubeSearch(YOUTUBE_API_KEY ?? '', workoutList[0].name)} />
+        <VideoIFrame video={currentExercise.mediaInstructions} />
         </>
     )
 }
