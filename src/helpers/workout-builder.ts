@@ -64,7 +64,7 @@ export const workoutBuilder = (rounds: IRound[], list: IExercise[], {duration, e
       let numberOfRoundsRemaining = duration - workoutRounds.length -1;
       while (numberOfRoundsRemaining > 0) {
         const extraRounds = middle.slice(0, numberOfRoundsRemaining)
-        workoutRounds.splice(builder.length-1,0, ...extraRounds.slice(0,numberOfRoundsRemaining));
+        workoutRounds.push(...extraRounds.slice(0,numberOfRoundsRemaining));
         numberOfRoundsRemaining -= extraRounds.length;
       }
     };
