@@ -45,8 +45,6 @@ export const workoutBuilder = (rounds: IRound[], list: IExercise[], {duration, e
       return isWithNecessaryEquipment;
     })
   
-    if (builder.length < duration) throw new Error('Not enough exercises that meet this criteria');
-  
     const roundsShuffled = shuffle(builder);
   
     const starter = roundsShuffled.filter(({isStarter}) => isStarter).slice(0, duration >= 9 ? 2 : 1);
@@ -57,16 +55,20 @@ export const workoutBuilder = (rounds: IRound[], list: IExercise[], {duration, e
     //get middle
     const middleRoundLength = duration - workoutRounds.length  - 1;
   
-    const middle = roundsShuffled.filter(({isStarter, isFinisher}) => !isStarter && !isFinisher)
-    
-    if (middleRoundLength > middle.length) {
-      throw new Error('Not enough exercises that meet this criteria');
-    } else {
-      middle.slice(0, middleRoundLength)
-    }
-  
+    const middle = roundsShuffled.filter(({isStarter, isFinisher}) => !isStarter && !isFinisher).slice(0, middleRoundLength)
+      
     workoutRounds.push(...middle)
-  
+
+    // pad middle rounds
+    if (workoutRounds.length < duration) {
+      let numberOfRoundsRemaining = duration - workoutRounds.length -1;
+      while (numberOfRoundsRemaining > 0) {
+        const extraRounds = middle.slice(0, numberOfRoundsRemaining)
+        workoutRounds.push(...extraRounds.slice(0,numberOfRoundsRemaining));
+        numberOfRoundsRemaining -= extraRounds.length;
+      }
+    };
+
     const finisher = roundsShuffled.find(({isFinisher}) => isFinisher) as IRound;
   
     workoutRounds.push(finisher)
