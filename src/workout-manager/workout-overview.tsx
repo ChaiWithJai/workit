@@ -22,7 +22,7 @@ const WorkoutOverview: React.FC<IProps> = ({exercises, setUserFunnelIdx, workout
                             return (
                                 <tr key={`exercise ${idx}-${subIdx}`}>
                                     <td>{exercise}</td>
-                                    <td>{duration}</td>
+                                    <td>{duration} seconds</td>
                                 </tr>
                             )
                         })

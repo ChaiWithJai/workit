@@ -6,7 +6,7 @@ import WorkoutPreferences from './workout-preferences';
 import {exerciseFinder, workoutBuilder, IExercise, IRound} from '../helpers/workout-builder';
 import staticData from '../static-data';
 import youtubeSearch from '../youtube-search-helpers/search-helper';
-import styles from './workout-container.css';
+import '../App.css';
 
 const YOUTUBE_API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
 
@@ -47,7 +47,7 @@ const WorkoutContainer: React.FC = () => {
 
 
     return (
-        <div className={styles.container}>
+        <div className="container">
             {renderSwitch(userFunnelIdx)}
         </div>
     )

@@ -49,12 +49,13 @@ const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
     return (
         <>
         <h1>
+        <h2>{currentExercise.name}</h2>
         <span>
+          Time Remaining:<br /><br />
           {timeLeft}
         </span>
         </h1>
         <br /><br /><br />
-        <h2>{currentExercise.name}</h2>
         <h3>How To:</h3>
         <VideoIFrame video={currentExercise.mediaInstructions} />
         </>
