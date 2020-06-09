@@ -4,7 +4,7 @@ import { IExercise } from '../helpers/workout-builder';
 import youtubeSearch from '../youtube-search-helpers/search-helper';
 import VideoIFrame from '../youtube-search-helpers/video-iframe';
 
-const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
+const YOUTUBE_API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
 
 console.log('api key', YOUTUBE_API_KEY)
 
@@ -21,7 +21,6 @@ interface IState {
     currentExercise: IExercise;
     timeOver: Date;
     timeLeft: number;
-    youtubeUrl: unknown;
 }
 
 const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
@@ -30,7 +29,6 @@ const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
         currentExercise: workoutList[0],
         timeLeft: workoutList[0].duration,
         timeOver: addSeconds(new Date(), workoutList[0].duration),
-        youtubeUrl: youtubeSearch(YOUTUBE_API_KEY ?? '', workoutList[0].name)
     };
 
     const reducer = (state: IState, action: IAction): IState => {
@@ -42,7 +40,7 @@ const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
         }
     };
 
-    const [{currentExercise, timeLeft, youtubeUrl}, dispatch] = useReducer(reducer, initialState);
+    const [{currentExercise, timeLeft}, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
         const interval = setInterval(() => dispatch({type: 'pace'}), 1000);
@@ -63,7 +61,7 @@ const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
         <br /><br /><br />
         <h2>{currentExercise.name}</h2>
         <h3>How To:</h3>
-        <VideoIFrame video={youtubeUrl} />
+        <VideoIFrame video={youtubeSearch(YOUTUBE_API_KEY ?? '', workoutList[0].name)} />
         </>
     )
 }

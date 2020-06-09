@@ -1,7 +1,7 @@
 import axios from 'axios';
 import querystring from 'querystring';
 
-const SEARCH_URL = process.env.YOUTUBE_SEARCH_URL_PREFIX;
+const SEARCH_URL = process.env.REACT_APP_YOUTUBE_SEARCH_URL_PREFIX;
 
 export default async function(apiKey: string, searchTerms: string) {
     const params = {
