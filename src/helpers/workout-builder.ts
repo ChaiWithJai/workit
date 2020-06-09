@@ -5,7 +5,7 @@ export interface IExercise {
     duration: number
     planeOfMotion: string | string[]
     writtenInstructions: string | null
-    mediaInstructions: string | null
+    mediaInstructions: string | null | any
     spaceNeeded:  string, // should this be more like a scale
     cardioIntensity:  string
     impactToBody:  string

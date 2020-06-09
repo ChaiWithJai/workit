@@ -1,6 +1,7 @@
 import {addSeconds, differenceInSeconds} from 'date-fns';
 import React, {useEffect, useReducer} from 'react';
 import { IExercise } from '../helpers/workout-builder';
+import VideoIFrame from '../youtube-search-helpers/video-iframe';
 
 interface IProps {
     workoutList: IExercise[];
@@ -22,7 +23,7 @@ const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
         currentExerciseIdx: 0, 
         currentExercise: workoutList[0],
         timeLeft: workoutList[0].duration,
-        timeOver: addSeconds(new Date(), workoutList[0].duration)
+        timeOver: addSeconds(new Date(), workoutList[0].duration),
     };
 
     const reducer = (state: IState, action: IAction): IState => {
@@ -54,6 +55,8 @@ const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
         </h1>
         <br /><br /><br />
         <h2>{currentExercise.name}</h2>
+        <h3>How To:</h3>
+        <VideoIFrame video={currentExercise.mediaInstructions} />
         </>
     )
 }
