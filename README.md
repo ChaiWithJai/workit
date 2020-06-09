@@ -1,6 +1,6 @@
 ## Workit Circuits
 
-Check us out our [https://workit.netlify.app/]app.
+Check us out [https://workit.netlify.app/].
 
 The goal of this app is to build a total body workout given how much time you have today and what equipment you have around you. Working out and healthy living is about making adjustments.
 
