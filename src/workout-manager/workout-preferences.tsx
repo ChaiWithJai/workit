@@ -23,10 +23,10 @@ const WorkoutPreferences: React.FC<IProps> = ({setUserFunnelIdx, setWorkout}) =>
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const name = e.target.name ?? e.currentTarget.name
         const value =  e.target.value ?? e.currentTarget.value;
-        setPreferences({...preferences, [name]: value});
+        setPreferences({...preferences, [name]: name === 'duration' ? Number(value) : value});
     }
 
-    const handleOnInput = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => setPreferences({...preferences, [e.currentTarget.name]: e.currentTarget.value});
+    const handleOnInput = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => setPreferences({...preferences, [e.currentTarget.name]: Number(e.currentTarget.value)});
 
     return (
         <form onSubmit={handleSubmit}>
