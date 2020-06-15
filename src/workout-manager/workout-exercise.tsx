@@ -38,7 +38,7 @@ const WorkoutExercise: React.FC<IProps> = ({ workoutList}: IProps) => {
     const [{currentExercise, timeLeft}, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        const interval = setInterval(() => dispatch({type: 'pace'}), 1000);
+        const interval = setInterval(() => dispatch({type: 'pace'}), 500);
         if (timeLeft <= 0) {
             dispatch({type: 'next'});
             return;
