@@ -13,3 +13,4 @@ The goal of this app is to build a total body workout given how much time you ha
 5. Health Goals and Pre-planned Workouts
 6. Food Journal
 
+Tech Stack:  Typescript, Node
